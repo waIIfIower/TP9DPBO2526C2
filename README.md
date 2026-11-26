@@ -82,4 +82,4 @@ TP9DPBO2526C2/
 
 ## Dokumentasi Screenrecord
 
-[Video demo CRUD Kandidat dan Lowongan](dokumentasi/demo-crud.mp4)
+[Video demo CRUD Kandidat dan Lowongan](https://youtu.be/8eftCdWY2iM)
