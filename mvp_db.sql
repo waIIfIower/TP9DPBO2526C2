@@ -1,6 +1,6 @@
--- Database: mvp_kandidat_db
-CREATE DATABASE IF NOT EXISTS `mvp_kandidat_db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `mvp_kandidat_db`;
+-- Database: mvp_db
+CREATE DATABASE IF NOT EXISTS `mvp_db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `mvp_db`;
 
 -- --------------------------------------------------------
 -- Struktur & Data Awal Tabel `kandidat`

@@ -3,7 +3,7 @@
 class DB
 {
     private string $host = 'localhost';
-    private string $dbname = 'mvp_kandidat_db';
+    private string $dbname = 'mvp_db';
     private string $username = 'root';
     private string $password = '';
     protected ?PDO $conn = null;
