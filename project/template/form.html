@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Form Kandidat Karyawan</title>
+  <style>
+    :root{
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --border: #e6e9ef;
+      --radius: 8px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);color:#0f172a;}
+    .container{max-width:650px;margin:36px auto;padding:18px;}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow: 0 1px 3px rgba(16,24,40,0.04);}
+    h1{margin:0 0 16px;font-size:20px;color:#0f172a;}
+    form{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:500;}
+    input[type="text"], input[type="number"]{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;box-sizing:border-box;}
+    .full{grid-column:1/-1;}
+    .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:10px;}
+    .btn{padding:9px 16px;border-radius:6px;border:1px solid transparent;font-size:14px;cursor:pointer;text-decoration:none;}
+    .btn-primary{background:var(--accent);color:#fff;font-weight:600;}
+    .btn-muted{background:transparent;border:1px solid var(--border);color:var(--muted);}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>{{FORM_TITLE}}</h1>
+
+      <form method="post" action="index.php">
+        <input type="hidden" name="modul" value="kandidat">
+        <input type="hidden" name="action" value="{{ACTION}}">
+        <input type="hidden" name="id" value="{{ID}}">
+
+        <div>
+          <label for="nama">Nama Kandidat</label>
+          <input id="nama" name="nama" type="text" placeholder="Nama lengkap kandidat" value="{{NAMA}}" required>
+        </div>
+
+        <div>
+          <label for="posisi">Posisi Dilamar</label>
+          <input id="posisi" name="posisi" type="text" placeholder="Misal: Backend Developer" value="{{POSISI}}" required>
+        </div>
+
+        <div>
+          <label for="domisili">Domisili</label>
+          <input id="domisili" name="domisili" type="text" placeholder="Misal: Bandung" value="{{DOMISILI}}" required>
+        </div>
+
+        <div>
+          <label for="skorTes">Skor Tes (0-100)</label>
+          <input id="skorTes" name="skorTes" type="number" min="0" max="100" step="1" value="{{SKOR_TES}}">
+        </div>
+
+        <div class="full">
+          <label for="pengalamanTahun">Pengalaman Kerja (Tahun)</label>
+          <input id="pengalamanTahun" name="pengalamanTahun" type="number" min="0" step="1" value="{{PENGALAMAN_TAHUN}}">
+        </div>
+
+        <div class="full actions">
+          <a href="index.php" class="btn btn-muted">Batal</a>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Daftar Lowongan Pekerjaan</title>
+  <style>
+    :root{
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --danger: #dc2626;
+      --border: #e6e9ef;
+      --radius: 8px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: light;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);color:#0f172a;}
+    .container{max-width:980px;margin:36px auto;padding:18px;}
+    .nav-tabs{display:flex;gap:8px;margin-bottom:16px;}
+    .nav-tab{padding:8px 16px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600;border:1px solid var(--border);background:var(--card);color:var(--muted);}
+    .nav-tab.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow: 0 1px 3px rgba(16,24,40,0.04);
+    }
+    h1{margin:0 0 14px 0;font-size:20px;color:#0f172a;}
+    table{width:100%;border-collapse:collapse;font-size:14px;}
+    thead th{text-align:left;padding:12px 10px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);}
+    tbody td{padding:12px 10px;border-bottom:1px solid var(--bg);vertical-align:middle;}
+    tbody tr:last-child td{border-bottom:0;}
+    .col-id{width:48px;color:var(--muted);}
+    .col-actions{width:160px;text-align:right;}
+    .btn{display:inline-block;padding:7px 12px;border-radius:6px;border:1px solid transparent;font-size:13px;cursor:pointer;text-decoration:none;}
+    .btn-edit{background:transparent;color:var(--accent);font-weight:600;}
+    .btn-delete{background:transparent;color:var(--danger);font-weight:600;border:none;}
+    .btn-add{background:var(--accent);color:#fff;font-weight:600;}
+    .badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;}
+    .badge-open{background:#dcfce7;color:#166534;}
+    .badge-closed{background:#fee2e2;color:#991b1b;}
+    .footer-bar{margin-top:16px;display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--border);}
+    tbody tr:hover td{background:rgba(37,99,235,0.02);}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav-tabs">
+      <a href="index.php?modul=kandidat" class="nav-tab">Data Kandidat</a>
+      <a href="index.php?modul=lowongan" class="nav-tab active">Data Lowongan</a>
+    </nav>
+
+    <div class="card">
+      <h1>Daftar Lowongan Pekerjaan</h1>
+
+      <div style="overflow:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-id">No</th>
+              <th>Judul Posisi</th>
+              <th>Departemen</th>
+              <th>Lokasi</th>
+              <th>Kuota</th>
+              <th>Status</th>
+              <th class="col-actions">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{TABLE_ROWS}}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footer-bar">
+        <div style="color:var(--muted);font-size:13px">
+          Total Lowongan: <strong style="color:#0f172a">{{TOTAL_DATA}}</strong>
+        </div>
+        <div>
+          <a href="index.php?modul=lowongan&screen=add" class="btn btn-add">+ Tambah Lowongan</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
