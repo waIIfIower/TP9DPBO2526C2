@@ -7,9 +7,10 @@ class ViewLowongan implements KontrakViewLowongan
     public function renderDaftar(string $rowsHtml, int $totalData): string
     {
         $template = file_get_contents(__DIR__ . '/../template/skin_lowongan.html');
-        $output = str_replace('{{TABLE_ROWS}}', $rowsHtml, $template);
-        $output = str_replace('{{TOTAL_DATA}}', (string) $totalData, $output);
-        return $output;
+        return strtr($template, [
+            '{{TABLE_ROWS}}' => $rowsHtml,
+            '{{TOTAL_DATA}}' => (string) $totalData,
+        ]);
     }
 
     public function renderForm(string $formTitle, string $action, array $formData = []): string
@@ -29,6 +30,6 @@ class ViewLowongan implements KontrakViewLowongan
             '{{SELECTED_DITUTUP}}' => $status === 'Ditutup' ? 'selected' : '',
         ];
 
-        return str_replace(array_keys($replacements), array_values($replacements), $template);
+        return strtr($template, $replacements);
     }
 }

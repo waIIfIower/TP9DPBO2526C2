@@ -27,7 +27,8 @@ class PresenterLowongan implements KontrakPresenterLowongan
 
         $badgeClass = $statusRaw === 'Dibuka' ? 'badge-open' : 'badge-closed';
 
-        return "<tr>
+        return <<<HTML
+        <tr>
             <td class="col-id">{$no}</td>
             <td><strong>{$judulPosisi}</strong></td>
             <td>{$departemen}</td>
@@ -43,7 +44,8 @@ class PresenterLowongan implements KontrakPresenterLowongan
                     <button type="submit" class="btn btn-delete">Hapus</button>
                 </form>
             </td>
-        </tr>";
+        </tr>
+        HTML;
     }
 
     public function tampilkanLowongan(): string

@@ -1,6 +1,6 @@
 # Panduan Screenrecord Demonstrasi Program
 
-Simpan file video rekaman layar (`.mp4` / `.mkv` / `.webm`) di dalam folder `dokumentasi/` ini sebelum mengunggah ke GitHub.
+[Video demo CRUD](demo-crud.mp4) sudah tersedia. Gunakan skenario berikut jika perlu merekam ulang.
 
 ## Skenario yang Direkomendasikan untuk Direkam
 1. **Menampilkan Database (`phpMyAdmin`)**: Tunjukkan database `mvp_kandidat_db` beserta tabel `kandidat` dan `lowongan`.

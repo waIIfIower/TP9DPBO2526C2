@@ -46,7 +46,7 @@ if ($modul === 'lowongan') {
     if ($screen === 'add') {
         echo $presenter->tampilkanFormLowongan();
     } elseif ($screen === 'edit') {
-        $id = isset($_GET['id']) ? (int) $_GET['id'] : null;
+        $id = (int) ($_GET['id'] ?? 0);
         echo $presenter->tampilkanFormLowongan($id);
     } else {
         echo $presenter->tampilkanLowongan();
@@ -87,7 +87,7 @@ if ($modul === 'lowongan') {
     if ($screen === 'add') {
         echo $presenter->tampilkanFormKandidat();
     } elseif ($screen === 'edit') {
-        $id = isset($_GET['id']) ? (int) $_GET['id'] : null;
+        $id = (int) ($_GET['id'] ?? 0);
         echo $presenter->tampilkanFormKandidat($id);
     } else {
         echo $presenter->tampilkanKandidat();

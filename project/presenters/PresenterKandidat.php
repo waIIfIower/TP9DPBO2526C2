@@ -24,7 +24,8 @@ class PresenterKandidat implements KontrakPresenter
         $skorTes = $kandidat->getSkorTes();
         $pengalaman = $kandidat->getPengalamanTahun();
 
-        return "<tr>
+        return <<<HTML
+        <tr>
             <td class="col-id">{$no}</td>
             <td><strong>{$nama}</strong></td>
             <td>{$posisi}</td>
@@ -39,7 +40,8 @@ class PresenterKandidat implements KontrakPresenter
                     <button type="submit" class="btn btn-delete">Hapus</button>
                 </form>
             </td>
-        </tr>";
+        </tr>
+        HTML;
     }
 
     public function tampilkanKandidat(): string
