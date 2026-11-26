@@ -37,11 +37,8 @@ Program ini memisahkan logika aplikasi menjadi tiga komponen utama untuk menjaga
    - Presenter menyerahkan string HTML siap tampil ke View.
 5. **Response**: View merender HTML (menggunakan template `skin.html` / `skin_lowongan.html` dan `form.html` / `form_lowongan.html`) dan menampilkannya ke user.
 
-<<<<<<< HEAD
-=======
 Untuk form Edit, Presenter mengambil data berdasarkan ID dan meneruskan nilainya ke View. Saat form dikirim, `index.php` meneruskan aksi POST ke Presenter. Presenter memvalidasi input dan memanggil Model. Setelah aksi selesai, `index.php` mengarahkan browser kembali ke daftar.
 
->>>>>>> a3b1fd1 (initial commit)
 ## Struktur Folder
 
 ```text
@@ -77,29 +74,12 @@ TP9DPBO2526C2/
 │   └── index.php
 │
 ├── dokumentasi/
-<<<<<<< HEAD
-│   └── Record.mp4
-│
-├── mvp_db.sql
-└── README.md
-=======
-│   ├── demo-crud.mp4
-│   └── PANDUAN_SCREENRECORD.md
+│   └── demo-crud.mp4
 │
 ├── mvp_db.sql
 └── README.md
 ```
 
-## Cara Menjalankan
-
-1. Jalankan MySQL atau MariaDB. Gunakan PHP 7.4 atau lebih baru dengan ekstensi `pdo_mysql`.
-2. Impor [mvp_db.sql](mvp_db.sql) dari root repo pada instalasi baru. Dump ini membuat database `mvp_kandidat_db`, tabel `kandidat` dan `lowongan`, serta data contoh.
-3. Sesuaikan koneksi di [`project/models/DB.php`](project/models/DB.php) jika perlu. Pengaturan awal menggunakan host `localhost`, pengguna `root`, dan kata sandi kosong.
-4. Dari root repo, jalankan `php -S localhost:8000 -t project` dan buka `http://localhost:8000/`. Jika menggunakan Apache, salin isi `project/` ke direktori situs dan buka URL direktori tersebut.
-
 ## Dokumentasi Screenrecord
 
-[Video demo CRUD Kandidat dan Lowongan](dokumentasi/demo-crud.mp4) berdurasi 48 detik. Bagian Kandidat dimulai pada `00:00` dan bagian Lowongan pada `00:24`. Tiap bagian menunjukkan daftar, form tambah, form edit yang terisi data lama, serta hasil penyimpanan dan penghapusan.
-
-Demo direkam dari aplikasi yang berjalan dengan PHP 8.4 dan MariaDB 10.4. Pengujian HTTP terpisah memverifikasi perubahan data langsung di MariaDB. [Panduan merekam ulang demonstrasi](dokumentasi/PANDUAN_SCREENRECORD.md).
->>>>>>> a3b1fd1 (initial commit)
+[Video demo CRUD Kandidat dan Lowongan](dokumentasi/demo-crud.mp4)
