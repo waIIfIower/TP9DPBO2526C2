@@ -1,17 +1,47 @@
-# TP9 DPBO — Implementasi Arsitektur Model-View-Presenter (MVP) Strict Passive View
+# Janji
+Saya Muhammad Dzaka Indrianto dengan NIM 2508755 mengerjakan Tugas Praktikum 9 pada Mata Kuliah Desain dan Pemrograman Berorientasi Objek (DPBO) untuk keberkahan-Nya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin
 
-Aplikasi manajemen rekrutmen dan HR berbasis PHP Native dengan pola arsitektur **Model-View-Presenter (MVP)** menggunakan pendekatan **Strict Passive View (*Dumb View*)**.
+# Proyek MVP - Manajemen Data Rekrutmen & HR
 
----
+Proyek ini adalah implementasi aplikasi web berbasis PHP Native yang menggunakan arsitektur **Model-View-Presenter (MVP)** dengan pendekatan **Strict Passive View**. Proyek ini mengelola data rekrutmen HR yang mencakup data **Kandidat** dan data **Lowongan**.
 
-## 1. Struktur Direktori
+## Arsitektur Program (MVP)
+
+Program ini memisahkan logika aplikasi menjadi tiga komponen utama untuk menjaga kode tetap rapi, terstruktur, dan mudah dikembangkan (*Separation of Concerns*).
+
+1. **Model (`models/`)**:
+   - Bertanggung jawab mengelola data dan berinteraksi langsung dengan database (MySQL) menggunakan PDO *prepared statement*.
+   - Mengimplementasikan interface `KontrakModel` dan `KontrakModelLowongan`.
+   - Contoh: `TabelKandidat.php` dan `TabelLowongan.php`.
+
+2. **View (`views/`)**:
+   - Bertanggung jawab menampilkan antarmuka pengguna (HTML) kepada user dengan konsep **Strict Passive View** (tidak memiliki perulangan `foreach`, fungsi `count()`, maupun referensi langsung ke Model/Entity).
+   - Mengimplementasikan interface `KontrakView` dan `KontrakViewLowongan`.
+   - Contoh: `ViewKandidat.php` dan `ViewLowongan.php`.
+
+3. **Presenter (`presenters/`)**:
+   - Bertindak sebagai perantara (jembatan) antara View dan Model.
+   - Menerima input dari View (melalui `index.php`), memproses logika bisnis, meminta data ke Model, merakit baris tabel HTML (`<tr>...</tr>`), dan menyerahkannya kembali ke View.
+   - Mengimplementasikan interface `KontrakPresenter` dan `KontrakPresenterLowongan`.
+
+### Alur Program
+
+1. **Request**: User membuka `index.php`.
+2. **Routing**: `index.php` mengecek parameter `modul` (`kandidat` atau `lowongan`), `screen` (`list`, `add`, atau `edit`), serta aksi `POST` (`tambah`, `ubah`, atau `hapus`).
+3. **Inisialisasi**: `index.php` membuat objek Model, View, dan Presenter yang sesuai.
+4. **Proses**:
+   - Presenter meminta data ke Model (`getAllKandidat()` atau `getAllLowongan()`).
+   - Model melakukan query ke Database.
+   - Model memetakan hasil query menjadi list objek Entity (`Kandidat` atau `Lowongan`) dan mengembalikannya ke Presenter.
+   - Presenter mengolah list objek Entity menjadi potongan baris tabel HTML dan menghitung total data.
+   - Presenter menyerahkan string HTML siap tampil ke View.
+5. **Response**: View merender HTML (menggunakan template `skin.html` / `skin_lowongan.html` dan `form.html` / `form_lowongan.html`) dan menampilkannya ke user.
+
+## Struktur Folder
 
 ```text
-TP9DPBO2526C.../
+TP9DPBO2526C2/
 ├── project/
-│   ├── index.php
-│   ├── mvp_db.sql
-│   ├── README.md
 │   ├── models/
 │   │   ├── DB.php
 │   │   ├── Kandidat.php
@@ -20,80 +50,29 @@ TP9DPBO2526C.../
 │   │   ├── Lowongan.php
 │   │   ├── KontrakModelLowongan.php
 │   │   └── TabelLowongan.php
-│   ├── presenters/
-│   │   ├── KontrakPresenter.php
-│   │   ├── PresenterKandidat.php
-│   │   ├── KontrakPresenterLowongan.php
-│   │   └── PresenterLowongan.php
+│   │
 │   ├── views/
 │   │   ├── KontrakView.php
 │   │   ├── ViewKandidat.php
 │   │   ├── KontrakViewLowongan.php
 │   │   └── ViewLowongan.php
-│   └── template/
-│       ├── form.html
-│       ├── skin.html
-│       ├── form_lowongan.html
-│       └── skin_lowongan.html
+│   │
+│   ├── presenters/
+│   │   ├── KontrakPresenter.php
+│   │   ├── PresenterKandidat.php
+│   │   ├── KontrakPresenterLowongan.php
+│   │   └── PresenterLowongan.php
+│   │
+│   ├── template/
+│   │   ├── skin.html
+│   │   ├── form.html
+│   │   ├── skin_lowongan.html
+│   │   └── form_lowongan.html
+│   │
+│   └── index.php
+│
 ├── dokumentasi/
-│   └── PANDUAN_SCREENRECORD.md
+│   └── Record.mp4
+│
 ├── mvp_db.sql
 └── README.md
-```
-
----
-
-## 2. Desain Program & Arsitektur MVP (Strict Passive View)
-
-Aplikasi memisahkan tanggung jawab menjadi tiga lapisan independen yang berkomunikasi melalui **kontrak (*interface*)**:
-
-1. **Model (`models/`)**
-   - `DB.php`: Kelas dasar koneksi database menggunakan **PDO** dengan *prepared statement* untuk mencegah SQL Injection.
-   - `Kandidat.php` & `Lowongan.php`: *Entity class* yang merepresentasikan baris data dari tabel `kandidat` dan `lowongan`.
-   - `KontrakModel.php` & `KontrakModelLowongan.php`: *Interface* kontrak akses data CRUD (`getAll`, `getById`, `add`, `update`, `delete`).
-   - `TabelKandidat.php` & `TabelLowongan.php`: Implementasi konkret *query* SQL dan *mapping* hasil ke objek *entity*.
-
-2. **View (`views/` & `template/`)**
-   - `KontrakView.php` & `KontrakViewLowongan.php`: *Interface* kontrak *rendering* tampilan (`renderDaftar`, `renderForm`).
-   - `ViewKandidat.php` & `ViewLowongan.php`: Implementasi **Strict Passive View** yang **100% terpisah dari Model/Entity**, tidak memiliki perulangan (`foreach`) maupun fungsi agregasi (`count()`), serta hanya memuat template HTML dan mengganti *placeholder token* (`{{TABLE_ROWS}}`, `{{TOTAL_DATA}}`, dll.).
-
-3. **Presenter (`presenters/`)**
-   - `KontrakPresenter.php` & `KontrakPresenterLowongan.php`: *Interface* kontrak logika presentasi dan aksi CRUD.
-   - `PresenterKandidat.php` & `PresenterLowongan.php`: Menghubungkan kontrak Model dan kontrak View, memvalidasi input, merakit markup baris tabel `<tr>...</tr>`, menghitung total data, serta menyiapkan data *prefill* untuk form *Update*.
-
----
-
-## 3. Desain Basis Data (`mvp_db.sql`)
-
-Database `mvp_kandidat_db` memiliki dua tabel utama:
-1. **`kandidat`**: `id` (PK, AI), `nama`, `posisi`, `domisili`, `skorTes`, `pengalamanTahun`.
-2. **`lowongan`**: `id` (PK, AI), `judulPosisi`, `departemen`, `lokasi`, `kuota`, `status` (`Dibuka` / `Ditutup`).
-
----
-
-## 4. Alur Program
-
-1. **Inisialisasi (`index.php`)**: Membaca parameter `modul` (`kandidat` sebagai default, atau `lowongan`), lalu menginstansiasi Model, View, dan Presenter yang sesuai.
-2. **Alur Read (`GET index.php` / `GET index.php?modul=lowongan`)**:
-   - `index.php` memanggil `$presenter->tampilkanKandidat()` / `$presenter->tampilkanLowongan()`.
-   - Presenter mengambil daftar objek *entity* dari Model (`getAll...()`), menghitung jumlah data, merakit baris `<tr>...</tr>`, lalu menyerahkan string HTML siap pakai ke View (`renderDaftar(...)`).
-3. **Alur Create & Update Form (`GET ?screen=add` atau `GET ?screen=edit&id=...`)**:
-   - Presenter memanggil `tampilkanForm...(?int $id)`. Jika `$id` tersedia, Presenter mengambil data lama dari Model untuk *prefill* form, lalu mengirimkannya ke View (`renderForm(...)`).
-4. **Alur Create, Update, Delete (`POST index.php`)**:
-   - `index.php` membaca `$_POST['action']` (`tambah`, `ubah`, atau `hapus`) dan meneruskannya ke Presenter.
-   - Presenter melakukan validasi dasar dan memanggil method Model dengan *prepared statement*, lalu melakukan *redirect* (*Post-Redirect-Get*) kembali ke halaman daftar.
-
----
-
-## 5. Cara Menjalankan Program
-
-1. Salin isi folder `project/` ke direktori web server lokal (misalnya `C:\xampp\htdocs\MVP_Kandidat` pada XAMPP atau `www/MVP_Kandidat` pada Laragon).
-2. Jalankan layanan **Apache** dan **MySQL**.
-3. Buka `http://localhost/phpmyadmin`, buat/pilih database, lalu *import* file `mvp_db.sql`.
-4. Akses aplikasi melalui browser di `http://localhost/MVP_Kandidat/`.
-
----
-
-## 6. Dokumentasi Screenrecord
-
-- File video rekaman layar (*screenrecord*) demonstrasi fitur CRUD modul **Kandidat** dan modul **Lowongan** disimpan di dalam folder `dokumentasi/`.
