@@ -1,9 +1,6 @@
 # Janji
 Saya Muhammad Dzaka Indrianto dengan NIM 2508755 mengerjakan Tugas Praktikum 9 pada Mata Kuliah Desain dan Pemrograman Berorientasi Objek (DPBO) untuk keberkahan-Nya maka saya tidak melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin
 
-# Proyek MVP - Manajemen Data Rekrutmen & HR
-
-Proyek ini adalah implementasi aplikasi web berbasis PHP Native yang menggunakan arsitektur **Model-View-Presenter (MVP)** dengan pendekatan **Strict Passive View**. Proyek ini mengelola data rekrutmen HR yang mencakup data **Kandidat** dan data **Lowongan**.
 
 ## Arsitektur Program (MVP)
 
